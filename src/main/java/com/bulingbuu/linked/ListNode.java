@@ -13,6 +13,10 @@ public class ListNode {
         this.next = next;
     }
 
+    public ListNode(int val) {
+        this.val = val;
+    }
+
     public static void outNode(ListNode node) {
         while (node != null) {
             System.out.print(node.val + "--->");

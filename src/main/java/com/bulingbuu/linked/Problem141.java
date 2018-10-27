@@ -13,9 +13,37 @@ public class Problem141 {
         ListNode node2 = new ListNode(3, node3);
         ListNode node1 = new ListNode(2, node2);
         ListNode head = new ListNode(1, node1);
+        node4.next = head;
+        System.out.println(hasCycle2(head));
     }
 
     public static boolean hasCycle(ListNode head) {
+        ListNode slow = head;
+        while (slow != null) {
+            slow = slow.next;
+            if (slow == head) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+
+    public static boolean hasCycle2(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return true;
     }
 }
