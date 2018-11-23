@@ -1,5 +1,6 @@
 package com.bulingbuu.filter;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public class DFAFilter {
                     while (step_ins > 0) {
                         ret.append(chars[start - step_ins]);
                         step_ins--;
-                        level=head;
+                        level = head;
                     }
 
                     ret.append(chars[start]);
@@ -82,16 +83,46 @@ public class DFAFilter {
         return ret.toString();
     }
 
+    public static void initFilter(String filePath) throws IOException {
+//        InputStream inputStream = DFAFilter.class.getClassLoader().getResourceAsStream(filePath);
+        FileInputStream inputStream=new FileInputStream(filePath);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        String line = null;
+        int i=0;
+        while ((line = br.readLine()) != null) {
+//            add(line);
+            i++;
+            System.out.println(line+"  "+i);
+            if ("电影".equals(line)){
+                System.out.println();
+            }
+        }
+
+
+    }
+
     private static Map<Character, Map> head = new HashMap<Character, Map>();
 
     private static final char END_CHAR = '^';
 
-    public static void main(String[] args) {
-
-        add("傻逼啊");
-        add("大傻逼");
-
-        String ret = filter("dfs东方闪电个傻逼啊,地方大傻逼,你是个大傻逼啊", "*");
-        System.out.println(ret);
-    }
+//    public static void main(String[] args) throws IOException {
+//        long start = System.currentTimeMillis();
+//        initFilter("keywords");
+//        long end=System.currentTimeMillis();
+//
+//        String msg="是否的开始福建省空间";
+//        String msg1="地方回民吃猪肉,性爱电影,sdf习近平";
+//        String msg2="所示阴茎挺进滋润肉洞里在阴户中抽送,达到法轮功";
+//        msg=filter(msg,"*");
+//        msg1=filter(msg1,"*");
+//        msg2=filter(msg2,"*");
+//        long end1=System.currentTimeMillis();
+//
+//        System.out.println(end-start);
+//        System.out.println(end1-end);
+//
+//        System.out.println(msg);
+//        System.out.println(msg1);
+//        System.out.println(msg2);
+//    }
 }
