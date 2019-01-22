@@ -8,7 +8,7 @@ import lombok.Setter;
  * @author bulingbuu
  * @date 19-1-22 下午7:45
  * <p>
- * 01背包,回溯实现
+ * 01背包基础版
  */
 @Setter
 @Getter
