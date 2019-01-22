@@ -20,7 +20,7 @@ import java.util.Set;
  * @date 18-11-21 下午7:03
  */
 @SupportedAnnotationTypes("CheckGetter")
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class CheckGetterProcessor extends AbstractProcessor {
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Set;
  * @date 18-11-21 下午7:01
  */
 @SupportedAnnotationTypes("Adapt")
-@SupportedSourceVersion(SourceVersion.RELEASE_10)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class AdaptProcessor extends AbstractProcessor {
 
     @Override
