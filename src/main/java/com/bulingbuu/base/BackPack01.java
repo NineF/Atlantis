@@ -25,9 +25,13 @@ public class BackPack01 {
     //备忘录
     boolean[][] mem;
 
+    int[][] data;
+
     private void init() {
         mem = new boolean[length][maxW];
+        data = new int[length][maxW+1];
     }
+
     public void clear() {
         result = -1;
         mem = new boolean[length][maxW];
@@ -59,7 +63,6 @@ public class BackPack01 {
             backTrack1(ob + 1, cw + weight[ob]);
         }
     }
-
 
 
     /**
@@ -94,6 +97,38 @@ public class BackPack01 {
     }
 
 
+    public void dynamicPlanning() {
+        //哨兵
+        data[0][0] = 1;
+        data[0][weight[0]] = 1;
+
+        for (int i = 1; i < length; i++) {
+            for (int j = 0; j <= maxW; j++) {
+                if (data[i - 1][j] == 1) {
+                    data[i][j] = 1;
+
+                    //加上后没达到最大值
+                    if (j + weight[i] <= maxW) {
+                        data[i][j + weight[i]] = 1;
+                    }
+                }
+            }
+
+//            for (int j=0;j+weight[i]<=maxW;j++){
+//                if (data[i - 1][j] == 1){
+//                    data[i][j + weight[i]] = 1;
+//                }
+//            }
+        }
+        for (int i = maxW; i > 0; --i) {
+            if (data[length - 1][i] == 1) {
+                System.out.println(i);
+                return;
+            }
+        }
+
+    }
+
 
     public static void main(String[] args) {
         BackPack01 backPack01 = new BackPack01();
@@ -108,6 +143,8 @@ public class BackPack01 {
         backPack01.clear();
         backPack01.backTrack2(0, 0);
         System.out.println(backPack01.getResult());
+
+        backPack01.dynamicPlanning();
 
     }
 }
