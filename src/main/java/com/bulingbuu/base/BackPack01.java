@@ -110,10 +110,10 @@ public class BackPack01 {
         for (int i = 1; i < length; i++) {
             for (int j = 0; j <= maxW; j++) {
                 if (data[i - 1][j] == 1) {
-                    //放入第一个
+                    //不放入
                     data[i][j] = 1;
 
-                    //放入第二个
+                    //放入
                     //加上后没达到最大值
                     if (j + weight[i] <= maxW) {
                         data[i][j + weight[i]] = 1;
