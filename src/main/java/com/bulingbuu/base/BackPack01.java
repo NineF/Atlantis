@@ -26,10 +26,12 @@ public class BackPack01 {
     boolean[][] mem;
 
     int[][] data;
+    int[] data1;
 
     private void init() {
         mem = new boolean[length][maxW];
-        data = new int[length][maxW+1];
+        data = new int[length][maxW + 1];
+        data1 = new int[maxW + 1];
     }
 
     public void clear() {
@@ -97,6 +99,9 @@ public class BackPack01 {
     }
 
 
+    /**
+     * 动态规划实现1
+     */
     public void dynamicPlanning() {
         //哨兵
         data[0][0] = 1;
@@ -105,8 +110,10 @@ public class BackPack01 {
         for (int i = 1; i < length; i++) {
             for (int j = 0; j <= maxW; j++) {
                 if (data[i - 1][j] == 1) {
+                    //放入第一个
                     data[i][j] = 1;
 
+                    //放入第二个
                     //加上后没达到最大值
                     if (j + weight[i] <= maxW) {
                         data[i][j + weight[i]] = 1;
@@ -122,6 +129,33 @@ public class BackPack01 {
         }
         for (int i = maxW; i > 0; --i) {
             if (data[length - 1][i] == 1) {
+                System.out.println(i);
+                return;
+            }
+        }
+
+    }
+
+    /**
+     * 动态规划第二种实现
+     */
+    public void dynamicPlanning2() {
+        //哨兵
+        data1[0] = 1;
+        data1[weight[0]] = 1;
+
+        for (int i = 1; i < length; i++) {
+            //这里必须从大到小,避免重复计算导致数据不准确
+            for (int j = maxW - weight[i]; j >= 0; j--) {
+                if (data1[j] == 1) {
+                    //放入第二个
+                    data1[j + weight[i]] = 1;
+                }
+            }
+        }
+
+        for (int i = maxW; i > 0; i--) {
+            if (data1[i] == 1) {
                 System.out.println(i);
                 return;
             }
@@ -145,6 +179,6 @@ public class BackPack01 {
         System.out.println(backPack01.getResult());
 
         backPack01.dynamicPlanning();
-
+        backPack01.dynamicPlanning2();
     }
 }
