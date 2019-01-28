@@ -99,22 +99,25 @@ public class BackPack01Two {
         }
 
         int result = -1;
+        int maxI = maxW;
         for (int i = maxW; i > 0; i--) {
             if (data[length - 1][i] > result) {
                 result = data[length - 1][i];
+                maxI = i;
             }
         }
         System.out.println(result);
 
+
     }
 
-    public void dynamicPlanning1() {
+    public void dynamicPlanning2() {
         data1[0] = 0;
         data1[weight[0]] = value[0];
 
         for (int i = 1; i < length; i++) {
             for (int j = maxW - weight[i]; j >= 0; j--) {
-                if (data1[j] > 0) {
+                if (data1[j] > -1) {
                     if (data1[j + weight[i]] < data1[j] + value[i]) {
                         data1[j + weight[i]] = data1[j] + value[i];
                     }
@@ -122,12 +125,61 @@ public class BackPack01Two {
             }
         }
         int result = -1;
+        int maxI = maxW;
         for (int i = maxW; i > 0; i--) {
             if (data1[i] > result) {
                 result = data1[i];
+                maxI = i;
             }
         }
         System.out.println(result);
+    }
+
+
+    public void double11advance(int[] items, int n, int w) {
+        boolean[][] states = new boolean[n][3 * w + 1];
+        states[0][0] = true;
+        states[0][items[0]] = true;
+
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j <= 3 * w; j++) {
+                if (states[i - 1][j]) {
+                    //不放入
+                    states[i][j] = true;
+
+                    if (j + items[i] <= 3 * w) {
+                        states[i][j + items[i]] = true;
+                    }
+
+                }
+            }
+        }
+
+        int j;
+        for (j = w; j < 3 * w + 1; j++) {
+            if (states[n - 1][j]) {
+                break;
+            }
+        }
+
+
+        if (j == 3 * w + 1) {
+            System.out.println("没有可行解");
+            return;
+        }
+
+        System.out.println(j);
+
+        for (int i = n - 1; i > 0; i--) {
+            if (j - items[i] >= 0 && states[i - 1][j - items[i]]) {
+                j = j - items[i];
+                System.out.print(items[i] + "  ");
+            }
+        }
+        if (j != 0) {
+            System.out.print(items[0]);
+        }
+
     }
 
 
@@ -144,6 +196,10 @@ public class BackPack01Two {
         backPack01Two.backTrack1(0, 0, 0);
         System.out.println(backPack01Two.getResult());
         backPack01Two.dynamicPlanning();
-        backPack01Two.dynamicPlanning1();
+        backPack01Two.dynamicPlanning2();
+
+
+        int[] items = { 12, 3, 23, 100, 32, 67, 44, 60, 56 };
+        backPack01Two.double11advance(items, items.length, 100);
     }
 }
