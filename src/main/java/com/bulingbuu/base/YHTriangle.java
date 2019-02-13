@@ -21,11 +21,15 @@ public class YHTriangle {
         items[0][root.data] = true;
         for (int i = 1; i < height; i++) {
             for (int j = 0; j <= maxLen; j++) {
-                if (items[i-1][j]){
+                if (items[i - 1][j]) {
 
                 }
             }
         }
+    }
+
+    public void triangle(int[] items, int length) {
+
     }
 
 
