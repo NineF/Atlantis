@@ -99,11 +99,9 @@ public class BackPack01Two {
         }
 
         int result = -1;
-        int maxI = maxW;
         for (int i = maxW; i > 0; i--) {
             if (data[length - 1][i] > result) {
                 result = data[length - 1][i];
-                maxI = i;
             }
         }
         System.out.println(result);
@@ -125,11 +123,9 @@ public class BackPack01Two {
             }
         }
         int result = -1;
-        int maxI = maxW;
         for (int i = maxW; i > 0; i--) {
             if (data1[i] > result) {
                 result = data1[i];
-                maxI = i;
             }
         }
         System.out.println(result);

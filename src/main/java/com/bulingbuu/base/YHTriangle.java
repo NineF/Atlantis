@@ -1,45 +1,48 @@
 package com.bulingbuu.base;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  * @author bulingbuu
  * @date 19-1-27 下午8:18
  */
 public class YHTriangle {
 
-    /**
-     * @param root 根节点
-     * @param height 高度
-     */
-    public void triangle(Node root, int height, int maxLen) {
-        boolean[][] items = new boolean[height][maxLen + 1];
-        if (root.data > maxLen) {
-            return;
-        }
-        items[0][root.data] = true;
-        for (int i = 1; i < height; i++) {
-            for (int j = 0; j <= maxLen; j++) {
-                if (items[i - 1][j]) {
+    int[][] matrix = { { 5 }, { 7, 8 }, { 2, 3, 4 }, { 4, 9, 6, 1 }, { 2, 7, 9, 4, 5 } };
 
+    public int triangle(int[][] matrix) {
+        int length = matrix.length;
+        int[][] item = new int[length][length];
+        item[0][0] = matrix[0][0];
+        for (int i = 1; i < length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                //右边
+                int tmp = Integer.MAX_VALUE;
+                //避免边界问题
+                if (j != matrix[i].length - 1) {
+                    tmp = item[i - 1][j] + matrix[i][j];
                 }
+                //左边
+                if (j != 0) {
+                    int tmp1 = item[i - 1][j - 1] + matrix[i][j];
+                    if (tmp1 < tmp) {
+                        tmp = tmp1;
+                    }
+                }
+                item[i][j] = tmp;
             }
         }
+
+
+        for (int i = 0; i < length; i++) {
+            System.out.println(item[length - 1][i]);
+        }
+
+        return 0;
     }
 
-    public void triangle(int[] items, int length) {
+    public static void main(String[] args) {
+        YHTriangle triangle = new YHTriangle();
+        triangle.triangle(triangle.matrix);
 
     }
-
-
-    @Setter
-    @Getter
-    class Node {
-        int data;
-        Node left;
-        Node right;
-    }
-
 
 }
