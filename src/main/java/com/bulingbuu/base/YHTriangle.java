@@ -31,12 +31,11 @@ public class YHTriangle {
             }
         }
 
-
+        int result=item[length - 1][0];
         for (int i = 0; i < length; i++) {
-            System.out.println(item[length - 1][i]);
+            result=Math.min(result,item[length-1][i]);
         }
-
-        return 0;
+        return result;
     }
 
     public static void main(String[] args) {
