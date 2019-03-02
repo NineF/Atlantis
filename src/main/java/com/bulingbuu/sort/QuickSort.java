@@ -9,7 +9,7 @@ public class QuickSort {
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
 
-        int[] array = new int[]{1, 3, 34,2312,2, 5};
+        int[] array = new int[]{1, 3, 34, 2312, 2, 5};
         quickSort.quick_sort(array, 0, array.length - 1);
 
         for (int i : array) {
@@ -17,6 +17,7 @@ public class QuickSort {
         }
 
     }
+
     public void quick_sort(int[] array, int p, int r) {
         if (p >= r) {
             return;
@@ -29,6 +30,7 @@ public class QuickSort {
 
     public int partition(int[] array, int p, int r) {
         int pivot = array[r];
+        //比pivot小的位置
         int i = p;
         for (int j = p; j <= r - 1; j++) {
             if (array[j] < pivot) {
