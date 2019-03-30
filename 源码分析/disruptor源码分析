@@ -5,3 +5,8 @@ Disruptor是一个高性能的线程间异步通信的框架，即在同一个JV
 
 RingBuffer:
 	环形数组的实现
+
+
+
+EventHandler:
+	处理事件的接口,通过onEvent回调可以获取到相应的event和序号
